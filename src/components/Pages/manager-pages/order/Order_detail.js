@@ -12,7 +12,6 @@ import {
     Row,
     Table,
     Spinner,
-    InputGroup
 } from "react-bootstrap";
 
 
@@ -20,7 +19,6 @@ import {
 // import { Step, StepLabel, Stepper } from "@mui/material";
 
 //Icons
-import RefreshIcon from '@mui/icons-material/Refresh';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -44,27 +42,27 @@ const OrderDetail = () => {
     const [serviceData, setServiceData] = useState([]);
     const { orderId } = useParams();
     const [active, setActive] = useState(1);
+    const [date, setDate] = useState([]);
+    const [time, setTime] = useState([]);
     const { workingStatus } = 2;
     //API
 
     //Date and time 
-    const startDate = () => {
-        if (order.implementationDate === null || order.implementationDate === undefined) {
+    const startDate = (dateInput) => {
+        if (dateInput === null || dateInput === undefined) {
             return "Chưa có ngày đến hẹn"
         } else {
-            console.log("Date:", order.implementationDate);
-            const date = moment(order.implementationDate).format("MM/DD/YYYY")
-
+            // console.log("Date:", order.implementationDate);
+            const date = moment(dateInput).format("MM/DD/YYYY")
             return date;
         }
     }
 
-    const startTime = () => {
-        if (order.implementationTime === null || order.implementationTime === undefined) {
+    const startTime = (timeInput) => {
+        if (timeInput === null || timeInput === undefined) {
             return "Chưa có giờ hẹn"
         } else {
-            console.log("Time:", order.implementationTime);
-            const time = moment(order.implementationDate).format("HH:mm")
+            const time = moment(timeInput).format("HH:mm")
             return time;
         }
     }
@@ -76,11 +74,14 @@ const OrderDetail = () => {
         isFetching: isFetching,
     } = useGetOrderDetailByIdQuery(orderId);
 
+    console.log("Data:", orderDetailData);
     useEffect(() => {
         if (!isFetching) {
             setOrder(orderDetailData)
             setEmployeeData(orderDetailData.listEmployeeAssign)
             setServiceData(orderDetailData.listOrderServiceInfor)
+            setDate(orderDetailData.implementationDate)
+            setTime(orderDetailData.implementationTime)
         }
     }, [isFetching]);
 
@@ -228,7 +229,7 @@ const OrderDetail = () => {
                                             <Form.Label>Ngày hẹn:</Form.Label>
                                             <Form.Control
                                                 readOnly
-                                                defaultValue={startDate()} // Địa chỉ
+                                                defaultValue={startDate(date)} // Địa chỉ
                                             />
                                         </Form.Group>
                                     </Col>
@@ -238,7 +239,7 @@ const OrderDetail = () => {
                                             <Form.Label>Giờ hẹn:</Form.Label>
                                             <Form.Control
                                                 readOnly
-                                                defaultValue={startTime()} // Địa chỉ
+                                                defaultValue={startTime(time)} // Địa chỉ
                                             />
                                         </Form.Group>
                                     </Col>
