@@ -1,0 +1,33 @@
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  // background-color: var(--main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:rgb(0 74 255 / 29%);
+  .logo-container {
+    background-color: white;
+    margin: auto;
+
+    img {
+      height: 250px;
+    }
+  }
+
+  .loginForm{
+    .form-button {
+      width: 60%;
+  
+      .spinner-border {
+        width: 20px;
+        height: 20px;
+        border: 3px solid currentColor;
+        border-right-color: transparent;
+      }
+    }
+  }
+  
+
+}
+

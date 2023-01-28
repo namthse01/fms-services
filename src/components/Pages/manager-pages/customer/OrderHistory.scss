@@ -1,0 +1,59 @@
+.order-detail-container {
+    width: 98%;
+    height: 100%;
+    margin-left: 26px !important;
+    padding: 5px 0 0 0;
+
+    .order-info-container{
+        margin-left: 10px;
+        box-shadow: 0px 3px 8px #a6a6a6;
+    }
+    .order-booking-container{
+        box-shadow: 0px 3px 8px #a6a6a6;
+        margin-top: 10px;
+        margin-left: 10px;
+
+        .table-service{
+             margin: 0;
+            text-align: center;
+
+            .th{
+                vertical-align: middle;
+                text-align: center;
+            }
+            
+            .td{
+                text-align: center;
+                vertical-align: middle;
+            }
+            .action-button-container{
+                display: flex;
+                column-gap: 20px;
+                justify-content: space-around;
+            }
+        }
+
+        .table-staff{
+            margin: 0;
+            text-align: center;
+            .th{
+                vertical-align: middle;
+                text-align: center;
+            }
+            
+            .td{
+                text-align: center;
+                vertical-align: middle;
+            }
+            .action-button-container{
+                display: flex;
+                column-gap: 20px;
+                justify-content: space-around;
+            }
+        }
+
+        .add-staff-btn{
+            margin-top: 20px;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+.assign-staff-container{
+    width: 98%;
+    height: 100%;
+    margin-left: 26px !important;
+    padding: 5px 0 0 0;
+
+    //Lịch làm việc nhân viên
+    .staff-schedule-container{
+        margin-left: 10px;
+        .table-filter-container {
+            padding-top: 10px;
+            .box-container{
+                height: 100%;
+                display: flex;
+                align-items: center;
+                .box{
+                    width: 50px;
+                    height: 100%;
+                    border: 1px solid #000000;
+                    margin: 0 10px 0 0;
+                }
+                .box-checked{
+                    background-color: #00b300;
+                }
+                .box-day-off{
+                    background-color: red;
+                }
+            }
+          }
+    }
+    // Bảng lịch làm việc của nhân viên
+    .staff-table-container{
+        margin-left: 10px;
+        box-shadow: 0px 3px 8px #a6a6a6;
+        .date-th{
+            vertical-align: middle;
+        }
+    }
+}
