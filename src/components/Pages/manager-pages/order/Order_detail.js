@@ -393,7 +393,7 @@ const OrderDetail = () => {
                             <Col xs lg="2">
                                 <Button
                                     onClick={() => {
-                                        setOrderChangeData({ ...orderChangeData, workingStatus: 2 })
+                                        setOrderChangeData({ ...orderChangeData, workingStatus: "2" })
                                         changeWorkingStatus()
                                         // navigate('/manager/order-detail/' + orderId);
                                     }}
@@ -404,7 +404,7 @@ const OrderDetail = () => {
                             <Col xs lg="2">
                                 <Button
                                     onClick={() => {
-                                        setOrderChangeData({ ...orderChangeData, workingStatus: 1002 })
+                                        setOrderChangeData({ ...orderChangeData, workingStatus: "1002" })
                                         changeWorkingStatus()
                                         // navigate('/manager/order-detail/' + orderId);
                                     }}
