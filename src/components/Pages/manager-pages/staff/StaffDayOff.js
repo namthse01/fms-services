@@ -20,9 +20,8 @@ import {
 
 //Icons
 import RefreshIcon from '@mui/icons-material/Refresh';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import UnpublishedIcon from '@mui/icons-material/Unpublished';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 //Api
 import { useGetStaffDayOffQuery } from "../../../../services/slices/staff/staffApi";
@@ -166,10 +165,14 @@ const StaffDayOff = () => {
                                                         <td>{staff.reason}</td>
                                                         <td></td>
                                                         <td>
-                                                            <CheckCircleIcon />
+                                                            <Button>
+                                                                <PersonAddAlt1Icon />
+                                                            </Button>
                                                         </td>
                                                         <td>
-                                                            <UnpublishedIcon />
+                                                            <Button>
+                                                                <PersonRemoveIcon />
+                                                            </Button>
                                                         </td>
                                                     </tr>
                                                 )
