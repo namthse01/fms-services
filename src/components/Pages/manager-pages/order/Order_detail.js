@@ -45,6 +45,7 @@ const OrderDetail = () => {
     const [date, setDate] = useState([]);
     const [time, setTime] = useState([]);
     const { workingStatus } = 2;
+    const { workingStatus2 } = 1002;
     //API
 
     //Date and time 
@@ -92,6 +93,18 @@ const OrderDetail = () => {
     const changeWorkingStatus = async () => {
         try {
             await orderWorkingStatus(orderId, workingStatus)
+                .unwrap()
+                .then(
+                    navigate("/manager/order")
+                )
+        } catch (error) {
+            console.log("Show error: ", error)
+        }
+    }
+
+    const changeWorkingStatus2 = async () => {
+        try {
+            await orderWorkingStatus(orderId, workingStatus2)
                 .unwrap()
                 .then(
                     navigate("/manager/order")
@@ -395,6 +408,16 @@ const OrderDetail = () => {
                                     }}
                                 >
                                     Xác nhận
+                                </Button>
+                            </Col>
+                            <Col className="d-flex flex-row-reverse">
+                                <Button
+                                    onClick={() => {
+                                        changeWorkingStatus2()
+                                        // navigate('/manager/order-detail/' + orderId);
+                                    }}
+                                >
+                                    Hủy đơn
                                 </Button>
                             </Col>
                         </Row>
