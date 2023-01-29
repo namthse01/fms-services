@@ -44,8 +44,6 @@ const OrderDetail = () => {
     const [active, setActive] = useState(1);
     const [date, setDate] = useState([]);
     const [time, setTime] = useState([]);
-    const { workingStatus } = 2;
-    const { workingStatus2 } = 1002;
     //API
 
     //Date and time 
@@ -89,22 +87,14 @@ const OrderDetail = () => {
 
     //Working Status
     const [orderWorkingStatus] = usePostChangeWorkingStatusMutation();
+    const [orderChangeData, setOrderChangeData] = useState({
+        orderId: orderId,
+        workingStatus: "",
+    })
 
     const changeWorkingStatus = async () => {
         try {
-            await orderWorkingStatus(orderId, workingStatus)
-                .unwrap()
-                .then(
-                    navigate("/manager/order")
-                )
-        } catch (error) {
-            console.log("Show error: ", error)
-        }
-    }
-
-    const changeWorkingStatus2 = async () => {
-        try {
-            await orderWorkingStatus(orderId, workingStatus2)
+            await orderWorkingStatus(orderChangeData)
                 .unwrap()
                 .then(
                     navigate("/manager/order")
@@ -403,6 +393,7 @@ const OrderDetail = () => {
                             <Col xs lg="2">
                                 <Button
                                     onClick={() => {
+                                        setOrderChangeData({ ...orderChangeData, workingStatus: 2 })
                                         changeWorkingStatus()
                                         // navigate('/manager/order-detail/' + orderId);
                                     }}
@@ -413,7 +404,8 @@ const OrderDetail = () => {
                             <Col xs lg="2">
                                 <Button
                                     onClick={() => {
-                                        changeWorkingStatus2()
+                                        setOrderChangeData({ ...orderChangeData, workingStatus: 1002 })
+                                        changeWorkingStatus()
                                         // navigate('/manager/order-detail/' + orderId);
                                     }}
                                 >
