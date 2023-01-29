@@ -43,7 +43,8 @@ const Order_approved = () => {
     const [serviceDetail, setServiceDetail] = useState([]);
     const [employeeDetail, setEmployeeDetail] = useState([]);
     const [imgList, setImgList] = useState([]);
-
+    const [date, setDate] = useState([]);
+    const [time, setTime] = useState([]);
 
 
     //Order Detail
@@ -58,26 +59,27 @@ const Order_approved = () => {
             setServiceDetail(orderDetailData.listOrderServiceInfor)
             setEmployeeDetail(orderDetailData.listEmployeeAssign)
             setImgList(orderDetailData.imageUrl)
+            setDate(orderDetailData.implementationDate)
+            setTime(orderDetailData.implementationTime)
         }
     }, [isFetching]);
 
-    //Time
-    const startDate = () => {
-        if (orders.implementationDate === null || orders.implementationDate === undefined) {
+    //Date and time 
+    const startDate = (dateInput) => {
+        if (dateInput === null || dateInput === undefined) {
             return "Chưa có ngày đến hẹn"
         } else {
-            const date = moment(orders.implementationDate).format("MM/DD/YYYY")
-
+            // console.log("Date:", order.implementationDate);
+            const date = moment(dateInput).format("MM/DD/YYYY")
             return date;
         }
     }
 
-    const startTime = () => {
-        if (orders.implementationTime === null || orders.implementationTime === undefined) {
+    const startTime = (timeInput) => {
+        if (timeInput === null || timeInput === undefined) {
             return "Chưa có giờ hẹn"
         } else {
-            const time = moment(orders.implementationDate).format("HH:mm")
-
+            const time = moment(timeInput).format("HH:mm")
             return time;
         }
     }
@@ -153,7 +155,7 @@ const Order_approved = () => {
                                             <Form.Control
                                                 readOnly
                                                 name="status"
-                                                value={startDate()}
+                                                value={startDate(date)}
                                             />
                                         </InputGroup>
                                     </Col>
@@ -165,7 +167,7 @@ const Order_approved = () => {
                                             <Form.Control
                                                 readOnly
                                                 name="status"
-                                                value={startTime()}
+                                                value={startTime(time)}
                                             />
                                         </InputGroup>
                                     </Col>

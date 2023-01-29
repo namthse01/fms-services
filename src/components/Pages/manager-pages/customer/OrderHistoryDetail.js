@@ -39,26 +39,26 @@ const OrderHistoryDetail = () => {
     const [serviceData, setServiceData] = useState([]);
     const { orderId } = useParams();
     const [active, setActive] = useState(1);
+    const [date, setDate] = useState([]);
+    const [time, setTime] = useState([]);
     //API
 
     //Date and time 
-    const startDate = () => {
-        if (order.implementationDate === null || order.implementationDate === undefined) {
+    const startDate = (dateInput) => {
+        if (dateInput === null || dateInput === undefined) {
             return "Chưa có ngày đến hẹn"
         } else {
-            console.log("Date:", order.implementationDate);
-            const date = moment(order.implementationDate).format("MM/DD/YYYY")
-
+            // console.log("Date:", order.implementationDate);
+            const date = moment(dateInput).format("MM/DD/YYYY")
             return date;
         }
     }
 
-    const startTime = () => {
-        if (order.implementationTime === null || order.implementationTime === undefined) {
+    const startTime = (timeInput) => {
+        if (timeInput === null || timeInput === undefined) {
             return "Chưa có giờ hẹn"
         } else {
-            console.log("Time:", order.implementationTime);
-            const time = moment(order.implementationDate).format("HH:mm")
+            const time = moment(timeInput).format("HH:mm")
             return time;
         }
     }
@@ -74,8 +74,21 @@ const OrderHistoryDetail = () => {
         if (!isFetching) {
             setOrder(orderDetailData)
             setServiceData(orderDetailData.listOrderServiceInfor)
+            setDate(orderDetailData.implementationDate)
+            setTime(orderDetailData.implementationTime)
         }
     }, [isFetching]);
+
+    //Price
+    const SumPrice = (quantity, price) => {
+        let newPrice = parseFloat(price);
+        if (quantity > 0) {
+            let sum = newPrice * quantity
+            return sum;
+        } else {
+            return "Phải có số lượng lớn hơn 0";
+        }
+    }
 
     const uniqueNames = [];
 
@@ -90,6 +103,8 @@ const OrderHistoryDetail = () => {
 
         return false;
     });
+
+
 
     return (
         <>
@@ -167,7 +182,7 @@ const OrderHistoryDetail = () => {
                                             <Form.Label>Ngày hẹn:</Form.Label>
                                             <Form.Control
                                                 readOnly
-                                                defaultValue={startDate()} // Địa chỉ
+                                                defaultValue={startDate(date)} // Địa chỉ
                                             />
                                         </Form.Group>
                                     </Col>
@@ -177,7 +192,7 @@ const OrderHistoryDetail = () => {
                                             <Form.Label>Giờ hẹn:</Form.Label>
                                             <Form.Control
                                                 readOnly
-                                                defaultValue={startTime()} // Địa chỉ
+                                                defaultValue={startTime(time)} // Địa chỉ
                                             />
                                         </Form.Group>
                                     </Col>
@@ -236,6 +251,9 @@ const OrderHistoryDetail = () => {
                                         <tr>
                                             <th>#</th>
                                             <th>Loại dịch vụ</th>
+                                            <th>Số lượng dịch vụ</th>
+                                            <th>Giá tiền một dịch vụ</th>
+                                            <th>Tổng giá tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -246,6 +264,9 @@ const OrderHistoryDetail = () => {
                                                     <tr key={index}>
                                                         <td>{index + 1}</td>
                                                         <td>{service.categoryName}</td>
+                                                        <td >{service.quantity}</td>
+                                                        <td>{service.price}</td>
+                                                        <td>{SumPrice(service.quantity, service.price)}</td>
                                                     </tr>
                                                 )
                                             })
