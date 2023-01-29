@@ -27,7 +27,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import imgDefault from "../../../../assets/images/login.png";
 
 //API
-import { usePostChangeWorkingStatusApproveMutation, useGetOrderDetailByIdQuery } from "../../../../services/slices/order/orderApi";
+import { usePostChangeWorkingStatusApproveMutation, usePostChangeWorkingStatusCancelMutation, useGetOrderDetailByIdQuery } from "../../../../services/slices/order/orderApi";
 
 
 const Order_approved = () => {
@@ -98,10 +98,26 @@ const Order_approved = () => {
 
     //Working Status
     const [orderWorkingStatus] = usePostChangeWorkingStatusApproveMutation();
+    const [orderWorkingStatus2] = usePostChangeWorkingStatusCancelMutation();
 
     const changeWorkingStatus = async () => {
         try {
             await orderWorkingStatus(orderId)
+                .unwrap()
+                .then((res) => {
+                    if (res) {
+                        navigate("/manager/order")
+                    }
+                }
+                )
+        } catch (error) {
+            console.log("Show error: ", error)
+        }
+    }
+
+    const changeWorkingStatus2 = async () => {
+        try {
+            await orderWorkingStatus2(orderId)
                 .unwrap()
                 .then((res) => {
                     if (res) {
@@ -308,15 +324,25 @@ const Order_approved = () => {
                         )}
                     </Card.Body>
                     <Card.Footer>
-                        <Row>
-                            <Col className="d-flex flex-row-reverse">
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="2">
                                 <Button
                                     onClick={() => {
                                         changeWorkingStatus()
                                         // navigate('/manager/order-detail/' + orderId);
                                     }}
                                 >
-                                    Xác Nhận
+                                    Xác nhận
+                                </Button>
+                            </Col>
+                            <Col xs lg="2">
+                                <Button
+                                    onClick={() => {
+                                        changeWorkingStatus2()
+                                        // navigate('/manager/order-detail/' + orderId);
+                                    }}
+                                >
+                                    Hủy đơn
                                 </Button>
                             </Col>
                         </Row>
