@@ -399,29 +399,27 @@ const OrderDetail = () => {
                         </Row>
                     </Card.Body>
                     <Card.Footer>
-                        <Row>
-                            <Form.Group as={Row} className="mb-3">
-                                <Col xs={6} md={2}>
-                                    <Button
-                                        onClick={() => {
-                                            changeWorkingStatus()
-                                            // navigate('/manager/order-detail/' + orderId);
-                                        }}
-                                    >
-                                        Xác nhận
-                                    </Button>
-                                </Col>
-                                <Col xs={6} md={2}>
-                                    <Button
-                                        onClick={() => {
-                                            changeWorkingStatus2()
-                                            // navigate('/manager/order-detail/' + orderId);
-                                        }}
-                                    >
-                                        Hủy đơn
-                                    </Button>
-                                </Col>
-                            </Form.Group>
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="2">
+                                <Button
+                                    onClick={() => {
+                                        changeWorkingStatus()
+                                        // navigate('/manager/order-detail/' + orderId);
+                                    }}
+                                >
+                                    Xác nhận
+                                </Button>
+                            </Col>
+                            <Col xs lg="2">
+                                <Button
+                                    onClick={() => {
+                                        changeWorkingStatus2()
+                                        // navigate('/manager/order-detail/' + orderId);
+                                    }}
+                                >
+                                    Hủy đơn
+                                </Button>
+                            </Col>
                         </Row>
                     </Card.Footer>
                 </Card>
