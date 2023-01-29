@@ -73,6 +73,17 @@ export const orderApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        postChangeWorkingStatusCancel: builder.mutation({
+            query: (orderId) => ({
+                url: `/api/manager/updateOrderWorkingStatus/orderId/${orderId}/orderWorkingStatusId/${1002}`,
+                method: "POST",
+                body: {
+                    orderId: parseInt(orderId),
+                    workingStatusId: 2,
+                },
+            }),
+        }),
+
         postChangeWorkingStatusApprove: builder.mutation({
             query: (orderId) => ({
                 url: `/api/manager/updateOrderWorkingStatus/orderId/${orderId}/orderWorkingStatusId/${4}`,
@@ -94,4 +105,5 @@ export const { useGetAllOrdersQuery,
     usePostChangeWorkingStatusApproveMutation,
     usePostChangeWorkingStatusAssignMutation,
     usePutDeleteStaffAssignMutation,
+    usePostChangeWorkingStatusCancelMutation
 } = orderApi;

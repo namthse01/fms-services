@@ -30,7 +30,7 @@ import './Order_detail.scss'
 import { Avatar } from "@mui/material";
 
 //Api
-import { useGetOrderDetailByIdQuery, usePostChangeWorkingStatusMutation, usePutDeleteStaffAssignMutation } from "../../../../services/slices/order/orderApi";
+import { useGetOrderDetailByIdQuery, usePostChangeWorkingStatusAssignMutation, usePostChangeWorkingStatusCancelMutation, usePutDeleteStaffAssignMutation } from "../../../../services/slices/order/orderApi";
 
 
 const OrderDetail = () => {
@@ -73,7 +73,6 @@ const OrderDetail = () => {
         isFetching: isFetching,
     } = useGetOrderDetailByIdQuery(orderId);
 
-    console.log("Data:", orderDetailData);
     useEffect(() => {
         if (!isFetching) {
             setOrder(orderDetailData)
@@ -86,15 +85,24 @@ const OrderDetail = () => {
 
 
     //Working Status
-    const [orderWorkingStatus] = usePostChangeWorkingStatusMutation();
-    const [orderChangeData, setOrderChangeData] = useState({
-        orderId: orderId,
-        workingStatus: "",
-    })
+    const [orderWorkingStatus] = usePostChangeWorkingStatusAssignMutation();
+    const [orderWorkingStatus2] = usePostChangeWorkingStatusCancelMutation();
 
     const changeWorkingStatus = async () => {
         try {
-            await orderWorkingStatus(orderChangeData)
+            await orderWorkingStatus(orderId)
+                .unwrap()
+                .then(
+                    navigate("/manager/order")
+                )
+        } catch (error) {
+            console.log("Show error: ", error)
+        }
+    }
+
+    const changeWorkingStatus2 = async () => {
+        try {
+            await orderWorkingStatus2(orderId)
                 .unwrap()
                 .then(
                     navigate("/manager/order")
@@ -153,8 +161,6 @@ const OrderDetail = () => {
 
         return false;
     });
-
-    console.log("Data:", order);
 
     return (
         <>
@@ -393,7 +399,6 @@ const OrderDetail = () => {
                             <Col xs lg="2">
                                 <Button
                                     onClick={() => {
-                                        setOrderChangeData({ ...orderChangeData, workingStatus: "2" })
                                         changeWorkingStatus()
                                         // navigate('/manager/order-detail/' + orderId);
                                     }}
@@ -404,8 +409,7 @@ const OrderDetail = () => {
                             <Col xs lg="2">
                                 <Button
                                     onClick={() => {
-                                        setOrderChangeData({ ...orderChangeData, workingStatus: "1002" })
-                                        changeWorkingStatus()
+                                        changeWorkingStatus2()
                                         // navigate('/manager/order-detail/' + orderId);
                                     }}
                                 >
