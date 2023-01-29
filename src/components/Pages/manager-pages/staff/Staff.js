@@ -156,7 +156,7 @@ const Staff = () => {
                                             <th>Tên nhân viên</th>
                                             <th>Số điện thoại</th>
                                             <th>Trạng thái</th>
-                                            <th>Hành động</th>
+                                            {/* <th>Hành động</th> */}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -169,7 +169,7 @@ const Staff = () => {
                                                         <td>{staff.employeeName}</td>
                                                         <td>{staff.employeePhoneNumber}</td>
                                                         <td>{checkStatus(staff.workingStatus)}</td>
-                                                        <td>
+                                                        {/* <td>
                                                             <div className="action-button-container">
                                                                 <OverlayTrigger
                                                                     placement="bottom"
@@ -184,7 +184,7 @@ const Staff = () => {
                                                                     }
                                                                 >
 
-                                                                    {/* navigate to staff detail */}
+                                                               
                                                                     <Button
                                                                         onClick={() => {
                                                                             navigate('/manager/staff-detail/' + staff.employeeId);
@@ -194,7 +194,7 @@ const Staff = () => {
                                                                     </Button>
                                                                 </OverlayTrigger>
                                                             </div>
-                                                        </td>
+                                                        </td> */}
                                                     </tr>
                                                 )
                                             })
