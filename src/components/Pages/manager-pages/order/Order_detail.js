@@ -400,7 +400,7 @@ const OrderDetail = () => {
                     </Card.Body>
                     <Card.Footer>
                         <Row>
-                            <Col className="d-flex flex-row-reverse">
+                            <Col>
                                 <Button
                                     onClick={() => {
                                         changeWorkingStatus()
@@ -410,7 +410,7 @@ const OrderDetail = () => {
                                     Xác nhận
                                 </Button>
                             </Col>
-                            <Col className="d-flex flex-row-reverse">
+                            <Col>
                                 <Button
                                     onClick={() => {
                                         changeWorkingStatus2()
