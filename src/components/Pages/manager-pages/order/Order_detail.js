@@ -400,26 +400,28 @@ const OrderDetail = () => {
                     </Card.Body>
                     <Card.Footer>
                         <Row>
-                            <Col>
-                                <Button
-                                    onClick={() => {
-                                        changeWorkingStatus()
-                                        // navigate('/manager/order-detail/' + orderId);
-                                    }}
-                                >
-                                    Xác nhận
-                                </Button>
-                            </Col>
-                            <Col>
-                                <Button
-                                    onClick={() => {
-                                        changeWorkingStatus2()
-                                        // navigate('/manager/order-detail/' + orderId);
-                                    }}
-                                >
-                                    Hủy đơn
-                                </Button>
-                            </Col>
+                            <Form.Group as={Row} className="mb-3">
+                                <Col xs={6} md={2}>
+                                    <Button
+                                        onClick={() => {
+                                            changeWorkingStatus()
+                                            // navigate('/manager/order-detail/' + orderId);
+                                        }}
+                                    >
+                                        Xác nhận
+                                    </Button>
+                                </Col>
+                                <Col xs={6} md={2}>
+                                    <Button
+                                        onClick={() => {
+                                            changeWorkingStatus2()
+                                            // navigate('/manager/order-detail/' + orderId);
+                                        }}
+                                    >
+                                        Hủy đơn
+                                    </Button>
+                                </Col>
+                            </Form.Group>
                         </Row>
                     </Card.Footer>
                 </Card>
