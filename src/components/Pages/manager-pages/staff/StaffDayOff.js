@@ -24,7 +24,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 //Api
-import { useGetStaffDayOffQuery } from "../../../../services/slices/staff/staffApi";
+import { useGetStaffDayOffQuery, usePutStaffDayOffMutation } from "../../../../services/slices/staff/staffApi";
 
 import CustomPagination from "../../../customPagination/CustomPagination";
 
@@ -40,6 +40,13 @@ const StaffDayOff = () => {
 
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("desc");
+
+    //Api
+    const {
+        data: staffsData = [],
+        refetch: refetch,
+        isFetching: isFetching,
+    } = useGetStaffDayOffQuery();
 
     const handlePaginationClick = (number) => {
         refetch();
@@ -59,28 +66,55 @@ const StaffDayOff = () => {
         refetch();
     };
 
+    useEffect(() => {
+        if (!isFetching) {
+            if (sort === "asc") {
+                if (search == "") {
+                    setStaffs(staffsData.filter((x) => x.status == filterDayoffStatus.status))
+                }
+                else {
+                    setStaffs(staffsData.filter((x) => x.employee.employeeName.includes(search) && x.status == filterDayoffStatus.status));
+                }
+
+            } else {
+                if (search == "") {
+                    setStaffs(staffsData.filter((x) => x.status == filterDayoffStatus.status).reverse())
+                }
+                else {
+                    setStaffs(staffsData.filter((x) => x.employee.employeeName.includes(search) && x.status == filterDayoffStatus.status).reverse());
+                }
+            }
+        }
+    }, [isFetching]);
+
     //Status dayy Off change 
     const handleFilterStatusChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-
+        setStatusData({ ...statusData, status: value })
         setfilterDayoffStatus({ ...filterDayoffStatus, [name]: value });
+        refetch()
     };
 
+    //Dayoff
+    const [statusData, setStatusData] = useState({
+        dayoffId: "",
+        status: "",
+    })
 
-    //Api
-    const {
-        data: staffsData = [],
-        refetch: refetch,
-        isFetching: isFetching,
-    } = useGetStaffDayOffQuery();
+    const [changeDayOffStatus] = usePutStaffDayOffMutation();
 
-    useEffect(() => {
-        if (!isFetching) {
-            setStaffs(staffsData)
+    const changeDaffOffStatus = async () => {
+        try {
+            await changeDayOffStatus(statusData)
+                .unwrap()
+                .then(
+                    refetch()
+                )
+        } catch (error) {
+            console.log("Show error: ", error)
         }
-    }, [isFetching]);
-
+    }
 
     return (
         <React.Fragment>
@@ -93,16 +127,37 @@ const StaffDayOff = () => {
                     </Row>
                     <Row className="d-flex align-items-end justify-content-between">
                         <Col xs={6}>
-                            <Form.Label>Tìm kiếm theo tên:</Form.Label>
+                            <Form.Label>Tìm kiếm theo tên nhân viên:</Form.Label>
                             <InputGroup>
-                                <FormControl
+                                <Form.Control
                                     type="text"
                                     name="search"
+                                    value={search}
+                                    onChange={(e) => {
+                                        setSearch(e.target.value);
+                                    }}
                                 />
-                                <Button>
+                                <Button
+                                    disabled={isFetching}
+                                    variant="primary"
+                                    onClick={handleSearch}
+                                    className="search-button"
+                                >
                                     Tìm kiếm
                                 </Button>
                             </InputGroup>
+                        </Col>
+                        <Col>
+                            <Form.Label>Thứ tự:</Form.Label>
+                            <Form.Control
+                                as="select"
+                                name="sort"
+                                value={sort}
+                                onChange={handleSort}
+                            >
+                                <option value="asc">Cũ đến mới</option>
+                                <option value="desc">Mới đến cũ</option>
+                            </Form.Control>
                         </Col>
                         <Col>
                             <Form.Label>Trạng Thái:</Form.Label>
@@ -113,7 +168,7 @@ const StaffDayOff = () => {
                                 onChange={handleFilterStatusChange}
                             >
                                 <option value="1">Chờ duyệt</option>
-                                <option value="2">Từ chối</option>
+                                <option value="0">Từ chối</option>
                                 <option value="3">Đã duyệt</option>
                             </Form.Control>
                         </Col>
@@ -143,11 +198,10 @@ const StaffDayOff = () => {
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Id nhân viên</th>
-                                            {/* <th>Số điện thoại</th> */}
+                                            <th>Tên nhân viên</th>
+                                            <th>Số điện thoại</th>
                                             <th>Ngày nghỉ</th>
                                             <th>Lý Do</th>
-                                            <th>Trạng thái đơn xin nghỉ</th>
                                             <th>Đồng ý</th>
                                             <th>Từ chối</th>
                                         </tr>
@@ -159,13 +213,18 @@ const StaffDayOff = () => {
                                                 return (
                                                     <tr key={index}>
                                                         <td>{index + 1}</td>
-                                                        <td>{staff.id}</td>
-                                                        {/* <td>{staff.employeePhoneNumber}</td> */}
+                                                        <td>{staff.employee.employeeName}</td>
+                                                        <td>{staff.employee.employeePhoneNumber}</td>
                                                         <td>{moment(staff.dayOff).format("MM/DD/YYYY")}</td>
                                                         <td>{staff.reason}</td>
-                                                        <td></td>
                                                         <td>
-                                                            <Button>
+                                                            <Button
+                                                                onClick={() => {
+                                                                    setStatusData({ ...statusData, dayoffId: staff.id })
+                                                                    changeDaffOffStatus()
+                                                                    // navigate('/manager/order-detail/' + orderId);
+                                                                }}
+                                                            >
                                                                 <PersonAddAlt1Icon />
                                                             </Button>
                                                         </td>

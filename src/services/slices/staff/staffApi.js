@@ -26,11 +26,23 @@ export const staffApi = apiSlice.injectEndpoints({
         getStaffDayOff: builder.query({
             query: () => "/api/employeeDayOff/getAllEmployeeDayOff/cai_nay_BE_test_ko_dung",
             keepUnusedDataFor: 0,
-        })
+        }),
+
+        //change dayOff status:
+
+        putStaffDayOff: builder.mutation({
+            query: (statusData) => ({
+                url: `/api/manager/updateEmployeeDayOffStatus/employeeDayOffId/${statusData.id}`,
+                method: "PUT",
+                body: {
+                    status: parseInt(statusData.status),
+                },
+            }),
+        }),
     })
 });
 
-export const { useGetAllStaffsQuery, useGetStaffByIdQuery, useGetAllSpecialtyQuery, useGetStaffDayOffQuery } = staffApi;
+export const { useGetAllStaffsQuery, useGetStaffByIdQuery, useGetAllSpecialtyQuery, useGetStaffDayOffQuery, usePutStaffDayOffMutation } = staffApi;
 
 
 // import axios from '../axios';
