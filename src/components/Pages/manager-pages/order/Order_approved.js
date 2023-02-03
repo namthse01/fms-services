@@ -175,15 +175,13 @@ const Order_approved = () => {
                                         </InputGroup>
                                     </Col>
                                     <Col>
-                                        <InputGroup>
-                                            <InputGroup.Text>
-                                                Giờ hẹn:
-                                            </InputGroup.Text>
+                                        <Form.Group>
+                                            <Form.Label>Giờ hẹn:</Form.Label>
                                             <Form.Control
                                                 readOnly
-                                                value={startTime(time)}
+                                                defaultValue={startTime(time)} // Địa chỉ
                                             />
-                                        </InputGroup>
+                                        </Form.Group>
                                     </Col>
                                 </Row>
                                 <Row>
