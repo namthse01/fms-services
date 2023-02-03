@@ -170,7 +170,6 @@ const Order_approved = () => {
                                             </InputGroup.Text>
                                             <Form.Control
                                                 readOnly
-                                                name="status"
                                                 value={startDate(date)}
                                             />
                                         </InputGroup>
@@ -182,7 +181,6 @@ const Order_approved = () => {
                                             </InputGroup.Text>
                                             <Form.Control
                                                 readOnly
-                                                name="status"
                                                 value={startTime(time)}
                                             />
                                         </InputGroup>
