@@ -223,7 +223,7 @@ const OrderDetail = () => {
                                             />
                                         </Form.Group>
                                     </Col>
-                                    <Col>
+                                    {/* <Col>
                                         <Form.Group>
                                             <Form.Label>Số địa chỉ:</Form.Label>
                                             <Form.Control
@@ -231,7 +231,7 @@ const OrderDetail = () => {
                                                 defaultValue={order.address} // Địa chỉ
                                             />
                                         </Form.Group>
-                                    </Col>
+                                    </Col> */}
                                     <Col>
                                         {/* Lịch hẹn */}
                                         <Form.Group>
@@ -293,7 +293,7 @@ const OrderDetail = () => {
                                         Trạng Thái
                                     </Form.Label>
                                     <Col xs={6} md={2}>
-                                        <Form.Control readOnly defaultValue="Đang xử lí" />
+                                        <Form.Control readOnly defaultValue="Đã tiếp nhận" />
                                     </Col>
                                 </Form.Group>
                             </Col>
@@ -342,7 +342,7 @@ const OrderDetail = () => {
                                             <tr>
                                                 <th>#</th>
                                                 <th>Tên nhân viên</th>
-                                                <th>Chuyên môn</th>
+                                                <th>Số điện thoại</th>
                                                 <th>Loại bỏ</th>
                                             </tr>
                                         </thead>
@@ -354,7 +354,7 @@ const OrderDetail = () => {
                                                             <tr key={index}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{employee.employeeName}</td>
-                                                                <td>{employee.specialtyName}</td>
+                                                                <td>{employee.employeePhoneNumber}</td>
                                                                 <td>
                                                                     {isFetching ? (<div className="loading">
                                                                         <Spinner animation="border" />

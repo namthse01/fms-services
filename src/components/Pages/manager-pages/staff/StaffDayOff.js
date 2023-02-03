@@ -24,7 +24,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 //Api
-import { useGetStaffDayOffQuery, usePutStaffDayOffMutation } from "../../../../services/slices/staff/staffApi";
+import { useGetStaffDayOffQuery, usePutStaffDayOffMutation, usePutStaffDayOffCancelMutation } from "../../../../services/slices/staff/staffApi";
 
 import CustomPagination from "../../../customPagination/CustomPagination";
 
@@ -98,15 +98,29 @@ const StaffDayOff = () => {
 
     //Dayoff
     const [statusData, setStatusData] = useState({
-        dayoffId: "",
+        id: "",
         status: "",
     })
 
     const [changeDayOffStatus] = usePutStaffDayOffMutation();
+    const [changeDayOffStatusCancel] = usePutStaffDayOffCancelMutation();
 
-    const changeDaffOffStatus = async () => {
+
+    const changetatus = async (id) => {
         try {
-            await changeDayOffStatus(statusData)
+            await changeDayOffStatus(id)
+                .unwrap()
+                .then(
+                    refetch()
+                )
+        } catch (error) {
+            console.log("Show error: ", error)
+        }
+    }
+
+    const changetatusCancel = async (id) => {
+        try {
+            await changeDayOffStatusCancel(id)
                 .unwrap()
                 .then(
                     refetch()
@@ -168,8 +182,9 @@ const StaffDayOff = () => {
                                 onChange={handleFilterStatusChange}
                             >
                                 <option value="1">Chờ duyệt</option>
-                                <option value="0">Từ chối</option>
                                 <option value="3">Đã duyệt</option>
+                                <option value="4">Từ chối</option>
+
                             </Form.Control>
                         </Col>
                         <Col xs={2}>
@@ -211,6 +226,7 @@ const StaffDayOff = () => {
                                             .slice(5 * (active - 1), 5 * active)
                                             .map((staff, index) => {
                                                 return (
+
                                                     <tr key={index}>
                                                         <td>{index + 1}</td>
                                                         <td>{staff.employee.employeeName}</td>
@@ -220,8 +236,7 @@ const StaffDayOff = () => {
                                                         <td>
                                                             <Button
                                                                 onClick={() => {
-                                                                    setStatusData({ ...statusData, dayoffId: staff.id })
-                                                                    changeDaffOffStatus()
+                                                                    changetatus(staff.id, staff.status)
                                                                     // navigate('/manager/order-detail/' + orderId);
                                                                 }}
                                                             >
@@ -229,7 +244,12 @@ const StaffDayOff = () => {
                                                             </Button>
                                                         </td>
                                                         <td>
-                                                            <Button>
+                                                            <Button
+                                                                onClick={() => {
+                                                                    changetatusCancel(staff.id)
+                                                                    // navigate('/manager/order-detail/' + orderId);
+                                                                }}
+                                                            >
                                                                 <PersonRemoveIcon />
                                                             </Button>
                                                         </td>
@@ -254,7 +274,7 @@ const StaffDayOff = () => {
                     </Row>
                 </Card>
             </Container>
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 

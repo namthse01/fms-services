@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./AssignStaff.scss"
+import "./AssignStaffApproved.scss"
 
 //React-bootstrap
 import {
@@ -25,10 +25,10 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 //API 
 import { useGetAllStaffsQuery } from "../../../../services/slices/staff/staffApi";
 import { usePostAssignOrderMutation } from "../../../../services/slices/order/orderApi";
-import { isEmpty } from "lodash";
 
 
-const AssignStaff = () => {
+const AssignStaffApproved = () => {
+
     //API
     const {
         data: staffsData = [],
@@ -59,6 +59,7 @@ const AssignStaff = () => {
     const handleFilterStaffWorkChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
+
         setfilterStaffWorkStatus({ ...filterStaffWorkStatus, [name]: value });
         refetch()
     };
@@ -70,20 +71,18 @@ const AssignStaff = () => {
         refetch();
     };
 
-    // console.log("staffData:", staffsData);
     useEffect(() => {
         if (!isFetching) {
-            // console.log("Status:", filterStaffWorkStatus.status);
-
             if (search == "") {
                 setStaffs(staffsData.filter((x) => JSON.stringify(x.workingStatus) == filterStaffWorkStatus.status))
-                // .filter((x) => x.workingStatus == filterStaffWorkStatus.status)
             }
             else {
                 setStaffs(staffsData.filter((x) => x.employeeName.includes(search) && JSON.stringify(x.workingStatus) == filterStaffWorkStatus.status));
             }
         }
     }, [isFetching]);
+
+
 
 
     //Assign Employee API
@@ -118,18 +117,17 @@ const AssignStaff = () => {
                     .unwrap()
                     .then((res) => {
                         (
-                            navigate("/manager/order-detail/" + orderId)
+                            navigate("/manager/order-approved/" + orderId)
                         )
                     })
             } catch (error) {
                 console.log("Show error: ", error)
             }
         } else {
-            navigate("/manager/order-detail/" + orderId)
+            navigate("/manager/order-approved/" + orderId)
         }
     }
 
-    // console.log("Staffs:", staffs);
     return (
         <>
             <Container fluid className="assign-staff-container">
@@ -272,4 +270,4 @@ const AssignStaff = () => {
 
 }
 
-export default AssignStaff;
+export default AssignStaffApproved;

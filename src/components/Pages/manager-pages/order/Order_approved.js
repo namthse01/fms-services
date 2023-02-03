@@ -28,6 +28,7 @@ import imgDefault from "../../../../assets/images/login.png";
 
 //API
 import { usePostChangeWorkingStatusApproveMutation, usePostChangeWorkingStatusCancelMutation, useGetOrderDetailByIdQuery } from "../../../../services/slices/order/orderApi";
+import { isEmpty } from "lodash";
 
 
 const Order_approved = () => {
@@ -47,22 +48,12 @@ const Order_approved = () => {
     const [time, setTime] = useState([]);
 
 
+
     //Order Detail
     const {
         data: orderDetailData = [],
         isFetching: isFetching,
     } = useGetOrderDetailByIdQuery(orderId);
-
-    useEffect(() => {
-        if (!isFetching) {
-            setOrders(orderDetailData)
-            setServiceDetail(orderDetailData.listOrderServiceInfor)
-            setEmployeeDetail(orderDetailData.listEmployeeAssign)
-            setImgList(orderDetailData.imageUrl)
-            setDate(orderDetailData.implementationDate)
-            setTime(orderDetailData.implementationTime)
-        }
-    }, [isFetching]);
 
     //Date and time 
     const startDate = (dateInput) => {
@@ -75,14 +66,16 @@ const Order_approved = () => {
         }
     }
 
-    const startTime = (timeInput) => {
-        if (timeInput === null || timeInput === undefined) {
-            return "Chưa có giờ hẹn"
-        } else {
-            const time = moment(timeInput).format("HH:mm")
-            return time;
+    useEffect(() => {
+        if (!isFetching) {
+            setOrders(orderDetailData)
+            setServiceDetail(orderDetailData.listOrderServiceInfor)
+            setEmployeeDetail(orderDetailData.listEmployeeAssign)
+            setImgList(orderDetailData.imageUrl)
+            setDate(orderDetailData.implementationDate)
+            setTime(orderDetailData.implementationTime)
         }
-    }
+    }, [isFetching]);
 
     //Price
     const SumPrice = (quantity, price) => {
@@ -130,7 +123,20 @@ const Order_approved = () => {
         }
     }
 
-    //Unique service
+    //Unique staff
+    const uniqueNamesStaff = [];
+
+    const uniqueStaffData = employeeDetail.filter(element => {
+        const isDuplicate = uniqueNamesStaff.includes(element.employeeId);
+
+        if (!isDuplicate) {
+            uniqueNamesStaff.push(element.employeeId);
+
+            return true;
+        }
+
+        return false;
+    });
 
     return (
         <>
@@ -175,13 +181,16 @@ const Order_approved = () => {
                                         </InputGroup>
                                     </Col>
                                     <Col>
-                                        <Form.Group>
-                                            <Form.Label>Giờ hẹn:</Form.Label>
+                                        <InputGroup>
+                                            <InputGroup.Text>
+                                                Giờ hẹn:
+                                            </InputGroup.Text>
                                             <Form.Control
                                                 readOnly
-                                                defaultValue={startTime(time)} // Địa chỉ
+                                                value={time}
                                             />
-                                        </Form.Group>
+                                        </InputGroup>
+
                                     </Col>
                                 </Row>
                                 <Row>
@@ -253,18 +262,18 @@ const Order_approved = () => {
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Tên Nhân viên</th>
-                                                    <th>Chuyên Môn</th>
+                                                    <th>Số điện thoại</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
-                                                {employeeDetail
+                                                {uniqueStaffData
                                                     .map((employee, index) => {
                                                         return (
                                                             <tr key={index}>
                                                                 <td>{index}</td>
                                                                 <td>{employee.employeeName}</td>
-                                                                <td >{employee.specialtyName}</td>
+                                                                <td >{employee.employeePhoneNumber}</td>
                                                             </tr>
                                                         )
                                                     })
@@ -277,7 +286,7 @@ const Order_approved = () => {
                                     <Col className="add-staff-btn">
                                         <Button
                                             onClick={() => {
-                                                navigate('/manager/assign-staff/' + orderId);
+                                                navigate('/manager/assign-staffApproved/' + orderId);
                                             }} >
                                             Thêm nhân viên
                                         </Button>

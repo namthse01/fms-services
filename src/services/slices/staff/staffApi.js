@@ -31,18 +31,28 @@ export const staffApi = apiSlice.injectEndpoints({
         //change dayOff status:
 
         putStaffDayOff: builder.mutation({
-            query: (statusData) => ({
-                url: `/api/manager/updateEmployeeDayOffStatus/employeeDayOffId/${statusData.id}`,
+            query: (id) => ({
+                url: `/api/manager/updateEmployeeDayOffStatus/employeeDayOffId/${id}`,
                 method: "PUT",
                 body: {
-                    status: parseInt(statusData.status),
+                    status: 3
+                },
+            }),
+        }),
+
+        putStaffDayOffCancel: builder.mutation({
+            query: (id) => ({
+                url: `/api/manager/updateEmployeeDayOffStatus/employeeDayOffId/${id}`,
+                method: "PUT",
+                body: {
+                    status: 4
                 },
             }),
         }),
     })
 });
 
-export const { useGetAllStaffsQuery, useGetStaffByIdQuery, useGetAllSpecialtyQuery, useGetStaffDayOffQuery, usePutStaffDayOffMutation } = staffApi;
+export const { useGetAllStaffsQuery, useGetStaffByIdQuery, useGetAllSpecialtyQuery, useGetStaffDayOffQuery, usePutStaffDayOffMutation, usePutStaffDayOffCancelMutation } = staffApi;
 
 
 // import axios from '../axios';

@@ -19,6 +19,7 @@ import OrderDetail from './components/Pages/manager-pages/order/Order_detail';
 import OrderApproved from './components/Pages/manager-pages/order/Order_approved';
 import AssignStaff from './components/Pages/manager-pages/order/AssignStaff';
 
+import AssignStaffApproved from './components/Pages/manager-pages/order/AssignStaffApproved';
 
 // import Service from './components/Pages/admin-pages/services/Services';
 // import Account from './components/Pages/admin-pages/accounts/Account';
@@ -120,6 +121,12 @@ const App = () => {
             <Route path='/manager/assign-staff/:orderId' element={
               <ProtectedRoute user={["manager"]}>
                 <AssignStaff />
+              </ProtectedRoute>
+            } />
+
+            <Route path='/manager/assign-staffApproved/:orderId' element={
+              <ProtectedRoute user={["manager"]}>
+                <AssignStaffApproved />
               </ProtectedRoute>
             } />
             <Route path='/manager/StaffDayOff' element={

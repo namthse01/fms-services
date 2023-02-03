@@ -271,7 +271,7 @@ const Order = () => {
                                                                         onClick={() => {
                                                                             if (order.statusId === 1) {
                                                                                 navigate('/manager/order-detail/' + order.orderId);
-                                                                            } else if (order.statusId === 3) {
+                                                                            } else if (order.statusId === 2) {
                                                                                 navigate('/manager/order-approved/' + order.orderId);
                                                                             }
                                                                             // else if(order.workingStatusId===6){
