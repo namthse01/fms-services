@@ -188,6 +188,9 @@ const Order = () => {
                                 <option value="1">Đã tiếp nhận</option>
                                 <option value="4">Chờ khảo sát</option>
                                 <option value="2">Đang khảo sát</option>
+                                <option value="1004">Chờ quản lý xác nhận</option>
+                                <option value="1005">Chờ khách hàng xác nhận</option>
+                                <option value="1006">Khách hàng đã duyệt</option>
                                 <option value="3">Đang thực hiện</option>
                                 <option value="5">Chờ thanh toán</option>
                                 <option value="6">Hoàn tất đơn</option>
@@ -271,7 +274,7 @@ const Order = () => {
                                                                         onClick={() => {
                                                                             if (order.statusId === 1) {
                                                                                 navigate('/manager/order-detail/' + order.orderId);
-                                                                            } else if (order.statusId === 2) {
+                                                                            } else if (order.statusId === 1004) {
                                                                                 navigate('/manager/order-approved/' + order.orderId);
                                                                             }
                                                                             // else if(order.workingStatusId===6){
@@ -333,6 +336,9 @@ const Order = () => {
                                 <option value="1">Đã tiếp nhận</option>
                                 <option value="4">Đang chờ khảo sát</option>
                                 <option value="2">Đang khảo sát</option>
+                                <option value="1004">Chờ quản lý xác nhận</option>
+                                <option value="1005">Chờ khách hàng xác nhận</option>
+                                <option value="1006">Khách hàng đã duyệt</option>
                                 <option value="3">Đang thực hiện</option>
                                 <option value="5">Chờ thanh toán</option>
                                 <option value="6">Hoàn tất đơn</option>

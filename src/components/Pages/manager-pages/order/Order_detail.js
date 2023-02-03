@@ -223,15 +223,6 @@ const OrderDetail = () => {
                                             />
                                         </Form.Group>
                                     </Col>
-                                    {/* <Col>
-                                        <Form.Group>
-                                            <Form.Label>Số địa chỉ:</Form.Label>
-                                            <Form.Control
-                                                readOnly
-                                                defaultValue={order.address} // Địa chỉ
-                                            />
-                                        </Form.Group>
-                                    </Col> */}
                                     <Col>
                                         {/* Lịch hẹn */}
                                         <Form.Group>

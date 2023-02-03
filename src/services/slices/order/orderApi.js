@@ -68,7 +68,7 @@ export const orderApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: {
                     orderId: parseInt(orderId),
-                    workingStatusId: 2,
+                    workingStatusId: 4,
                 },
             }),
         }),
@@ -86,11 +86,11 @@ export const orderApi = apiSlice.injectEndpoints({
 
         postChangeWorkingStatusApprove: builder.mutation({
             query: (orderId) => ({
-                url: `/api/manager/updateOrderWorkingStatus/orderId/${orderId}/orderWorkingStatusId/${3}`,
+                url: `/api/manager/updateOrderWorkingStatus/orderId/${orderId}/orderWorkingStatusId/${1005}`,
                 method: "POST",
                 body: {
                     orderId: parseInt(orderId),
-                    workingStatusId: 4,
+                    workingStatusId: 1005,
                 },
             }),
         }),

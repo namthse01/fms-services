@@ -92,19 +92,21 @@ const Sidebar = () => {
                 <Navbar expand="lg">
                     <Nav className="nav flex-column" activeKey={location.pathname}>
                         <Nav.Item className="user-avatar">
-                            <Avatar
-                                src={defaultUserAvatar
-                                    // !data?.imgURL || imgLoading
-                                    //     ? defaultUserAvatar
-                                    //     : data.imgURL
-                                }
-                                // onLoad={() => setImgLoading(false)}
-                                sx={{
-                                    width: "150px",
-                                    height: "150px",
-                                    border: "1px solid #000000",
-                                }}
-                            />
+                            <Nav.Link as={Link} to="/userProfile">
+                                <Avatar
+                                    src={defaultUserAvatar
+                                        // !data?.imgURL || imgLoading
+                                        //     ? defaultUserAvatar
+                                        //     : data.imgURL
+                                    }
+                                    // onLoad={() => setImgLoading(false)}
+                                    sx={{
+                                        width: "150px",
+                                        height: "150px",
+                                        border: "1px solid #000000",
+                                    }}
+                                />
+                            </Nav.Link>
                         </Nav.Item>
 
                         <div

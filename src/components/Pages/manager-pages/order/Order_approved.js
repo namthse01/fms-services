@@ -143,6 +143,16 @@ const Order_approved = () => {
             <Container fluid className="order-approved-container">
                 <Card className="booking-info-container">
                     <Card.Body>
+                        <Row>
+                            <Col>
+                                <Card.Title>
+                                    <ArrowBackIcon onClick={() => {
+                                        navigate('/manager/order');
+                                    }} />
+                                    Thông tin đơn
+                                </Card.Title>
+                            </Col>
+                        </Row>
                         {isFetching ? (<div className="loading">
                             <Spinner animation="border" />
                             <div className="loading-text">Đang tải dữ liệu...</div>
@@ -150,47 +160,48 @@ const Order_approved = () => {
                             <Col>
                                 <Row>
                                     <Col>
-                                        <Card.Title>
-                                            <ArrowBackIcon onClick={() => {
-                                                navigate('/manager/order');
-                                            }} />
-                                            Thông tin đơn
-                                        </Card.Title>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <Form.Label>Khách hàng:</Form.Label>
-                                        {/* API */}
-                                        <p>{orders.customerName}</p>
-                                    </Col>
-                                    <Col>
-                                        <Form.Label>Số điện thoại:</Form.Label>
-                                        {/* API */}
-                                        <p>{orders.customerPhone}</p>
-                                    </Col>
-                                    <Col>
-                                        <InputGroup>
-                                            <InputGroup.Text>
-                                                Ngày hẹn:
-                                            </InputGroup.Text>
-                                            <Form.Control
-                                                readOnly
-                                                value={startDate(date)}
-                                            />
-                                        </InputGroup>
-                                    </Col>
-                                    <Col>
-                                        <InputGroup>
-                                            <InputGroup.Text>
-                                                Giờ hẹn:
-                                            </InputGroup.Text>
-                                            <Form.Control
-                                                readOnly
-                                                value={time}
-                                            />
-                                        </InputGroup>
-
+                                        <Row>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Mã đơn:</Form.Label>
+                                                    <Form.Control
+                                                        readOnly
+                                                        defaultValue={orderId} // Mã đơn
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group>
+                                                    <Form.Label>Họ và tên:</Form.Label>
+                                                    <Form.Control
+                                                        readOnly
+                                                        defaultValue={orders.customerName} // tên khách hàng
+                                                    />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Label>Số điện thoại:</Form.Label>
+                                                {/* API */}
+                                                <Form.Control
+                                                    readOnly
+                                                    defaultValue={orders.customerPhone} // tên khách hàng
+                                                />
+                                            </Col>
+                                            <Col>
+                                                <Form.Label>Ngày hẹn:</Form.Label>
+                                                <Form.Control
+                                                    readOnly
+                                                    value={startDate(date)}
+                                                />
+                                            </Col>
+                                            <Col>
+                                                <Form.Label>Giờ hẹn:</Form.Label>
+                                                <Form.Control
+                                                    readOnly
+                                                    value={time}
+                                                />
+                                            </Col>
+                                        </Row>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -203,18 +214,6 @@ const Order_approved = () => {
                                             rows={3}
                                             value={orders.description}
                                         />
-                                    </Col>
-                                </Row>
-                                <Row className="mt-2">
-                                    <Col>
-                                        <Form.Label>Loại đơn:</Form.Label>
-                                        {/* API */}
-                                        <p>Sửa chữa đồ gỗ</p>
-                                    </Col>
-                                    <Col>
-                                        <Form.Label>Địa chỉ:</Form.Label>
-                                        {/* API */}
-                                        <p>{orderDetailData.address}</p>
                                     </Col>
                                 </Row>
                                 <Row>
