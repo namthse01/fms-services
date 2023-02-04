@@ -105,13 +105,12 @@ const CustomerDetail = () => {
         }
     }, [isFetching]);
 
-    console.log("Orders:", orders);
-
     const handleFilterStatusChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
 
         setfilterWorking({ ...filterWorking, [name]: value });
+        refetch()
     };
 
     return (

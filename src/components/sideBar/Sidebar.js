@@ -102,7 +102,7 @@ const Sidebar = () => {
                                 sx={{
                                     width: "150px",
                                     height: "150px",
-                                    border: "1px solid #000000",
+                                    border: "1.5px solid #000000",
                                 }}
                             />
                         </Nav.Item>

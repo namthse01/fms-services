@@ -37,6 +37,7 @@ const OrderHistoryDetail = () => {
     const navigate = useNavigate();
     const [order, setOrder] = useState([]);
     const [serviceData, setServiceData] = useState([]);
+    const [employeeDetail, setEmployeeDetail] = useState([]);
     const { orderId } = useParams();
     const [active, setActive] = useState(1);
     const [date, setDate] = useState([]);
@@ -74,6 +75,7 @@ const OrderHistoryDetail = () => {
         if (!isFetching) {
             setOrder(orderDetailData)
             setServiceData(orderDetailData.listOrderServiceInfor)
+            setEmployeeDetail(orderDetailData.listEmployeeAssign)
             setDate(orderDetailData.implementationDate)
             setTime(orderDetailData.implementationTime)
         }
@@ -104,7 +106,20 @@ const OrderHistoryDetail = () => {
         return false;
     });
 
+    //Unique staff
+    const uniqueNamesStaff = [];
 
+    const uniqueStaffData = employeeDetail.filter(element => {
+        const isDuplicate = uniqueNamesStaff.includes(element.employeeId);
+
+        if (!isDuplicate) {
+            uniqueNamesStaff.push(element.employeeId);
+
+            return true;
+        }
+
+        return false;
+    });
 
     return (
         <>
@@ -269,6 +284,36 @@ const OrderHistoryDetail = () => {
                                                         <td>{SumPrice(service.quantity, service.price)}</td>
                                                     </tr>
                                                 )
+                                            })
+                                        }
+                                    </tbody>
+                                </Table>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="table-container">
+                                <Form.Label>Danh sách dịch vụ khách hàng đặt:</Form.Label>
+                                <Table bordered size="sm">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tên Nhân viên</th>
+                                            <th>Số điện thoại</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {uniqueStaffData
+                                            .map((employee, index) => {
+                                                if (employee.workingStatus === true) {
+                                                    return (
+                                                        <tr key={index}>
+                                                            <td>{index}</td>
+                                                            <td>{employee.employeeName}</td>
+                                                            <td >{employee.employeePhoneNumber}</td>
+                                                        </tr>
+                                                    )
+                                                }
                                             })
                                         }
                                     </tbody>

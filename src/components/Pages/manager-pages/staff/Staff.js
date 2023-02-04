@@ -72,11 +72,11 @@ const Staff = () => {
 
     const checkStatus = (status) => {
         if (status === true) {
-            return "Đang làm việc";
+            return "Đang có đơn";
         }
 
         if (status === false) {
-            return "Đang nghỉ";
+            return "Đang trống đơn";
         }
 
         return "";
@@ -155,6 +155,7 @@ const Staff = () => {
                                             <th>#</th>
                                             <th>Tên nhân viên</th>
                                             <th>Số điện thoại</th>
+                                            <th>Chuyên môn</th>
                                             <th>Trạng thái</th>
                                             {/* <th>Hành động</th> */}
                                         </tr>
@@ -168,6 +169,7 @@ const Staff = () => {
                                                         <td>{index + 1}</td>
                                                         <td>{staff.employeeName}</td>
                                                         <td>{staff.employeePhoneNumber}</td>
+                                                        <td>{staff.specialtyName}</td>
                                                         <td>{checkStatus(staff.workingStatus)}</td>
                                                         {/* <td>
                                                             <div className="action-button-container">
