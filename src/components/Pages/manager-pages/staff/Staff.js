@@ -33,6 +33,7 @@ const Staff = () => {
     const [staffs, setStaffs] = useState([]);
 
     const [search, setSearch] = useState("");
+
     const [sort, setSort] = useState("desc");
 
     const handlePaginationClick = (number) => {
@@ -62,14 +63,33 @@ const Staff = () => {
 
     useEffect(() => {
         if (!isFetching) {
-
             if (sort === "asc") {
-                setStaffs(staffsData.filter((x) => x.employeeName.includes(search)));
+                if (search == "") {
+                    setStaffs(staffsData.filter((x) => JSON.stringify(x.specialtyId) == fileterSpecialty.specialtyId))
+                } else {
+                    setStaffs(staffsData.filter((x) => x.employeeName.includes(search) && JSON.stringify(x.specialtyId) == fileterSpecialty.specialtyId));
+                }
             } else {
-                setStaffs(staffsData.filter((x) => x.employeeName.includes(search)).reverse());
+                if (search == "") {
+                    setStaffs(staffsData.filter((x) => JSON.stringify(x.specialtyId) == fileterSpecialty.specialtyId).reverse())
+                }
+                else {
+                    setStaffs(staffsData.filter((x) => x.employeeName.includes(search) && JSON.stringify(x.specialtyId) == fileterSpecialty.specialtyId).reverse());
+                }
             }
         }
     }, [isFetching]);
+
+    const [fileterSpecialty, setFilterSpecialty] = useState({
+        specialtyId: "1",
+    });
+    const handleFilterSpecialtyChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+
+        setFilterSpecialty({ ...fileterSpecialty, [name]: value });
+        refetch()
+    };
 
     const checkStatus = (status) => {
         if (status === true) {
@@ -79,7 +99,6 @@ const Staff = () => {
         if (status === false) {
             return "Đang trống đơn";
         }
-
         return "";
     };
 
@@ -115,6 +134,18 @@ const Staff = () => {
                                     Tìm kiếm
                                 </Button>
                             </InputGroup>
+                        </Col>
+                        <Col>
+                            <Form.Label>Trạng Thái:</Form.Label>
+                            <Form.Control
+                                as="select"
+                                name="specialtyId"
+                                value={fileterSpecialty.specialtyId}
+                                onChange={handleFilterSpecialtyChange}
+                            >
+                                <option value="1">Thợ Gỗ</option>
+                                <option value="2">Thợ Kim Loại</option>
+                            </Form.Control>
                         </Col>
                         <Col>
                             <Form.Label>Thứ tự:</Form.Label>

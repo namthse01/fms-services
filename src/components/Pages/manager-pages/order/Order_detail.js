@@ -92,9 +92,11 @@ const OrderDetail = () => {
         try {
             await orderWorkingStatus(orderId)
                 .unwrap()
-                .then(
-                    navigate("/manager/order")
-                )
+                .then((res) => {
+                    if (res) {
+                        navigate("/manager/order")
+                    }
+                })
         } catch (error) {
             console.log("Show error: ", error)
         }
@@ -104,9 +106,11 @@ const OrderDetail = () => {
         try {
             await orderWorkingStatus2(orderId)
                 .unwrap()
-                .then(
-                    navigate("/manager/order")
-                )
+                .then((res) => {
+                    if (res) {
+                        navigate("/manager/order")
+                    }
+                })
         } catch (error) {
             console.log("Show error: ", error)
         }

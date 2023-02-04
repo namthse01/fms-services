@@ -27,7 +27,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import imgDefault from "../../../../assets/images/login.png";
 
 //API
-import { usePostChangeWorkingStatusApproveMutation, usePostChangeWorkingStatusCancelMutation, useGetOrderDetailByIdQuery } from "../../../../services/slices/order/orderApi";
+import { usePostChangeWorkingStatusApproveMutation, usePostChangeWorkingStatusCancelMutation, useGetOrderDetailByIdQuery, usePostChangeWorkingStatusAssignMutation } from "../../../../services/slices/order/orderApi";
 import { isEmpty } from "lodash";
 
 
@@ -101,6 +101,7 @@ const Order_approved = () => {
     //Working Status
     const [orderWorkingStatus] = usePostChangeWorkingStatusApproveMutation();
     const [orderWorkingStatus2] = usePostChangeWorkingStatusCancelMutation();
+    const [orderWorkingStatus3] = usePostChangeWorkingStatusAssignMutation();
 
     const changeWorkingStatus = async () => {
         try {
@@ -132,6 +133,22 @@ const Order_approved = () => {
         }
     }
 
+    const changeWorkingStatus3 = async () => {
+        try {
+            await orderWorkingStatus3(orderId)
+                .unwrap()
+                .then((res) => {
+                    if (res) {
+                        navigate("/manager/order")
+                    }
+                }
+                )
+        } catch (error) {
+            console.log("Show error: ", error)
+        }
+    }
+
+
     //Unique staff
     const uniqueNamesStaff = [];
 
@@ -146,6 +163,8 @@ const Order_approved = () => {
 
         return false;
     });
+
+    console.log("Description:", orderDetailData);
 
     return (
         <>
@@ -349,6 +368,16 @@ const Order_approved = () => {
                                     }}
                                 >
                                     Xác nhận
+                                </Button>
+                            </Col>
+                            <Col xs lg="2">
+                                <Button
+                                    onClick={() => {
+                                        changeWorkingStatus3()
+                                        // navigate('/manager/order-detail/' + orderId);
+                                    }}
+                                >
+                                    Từ chối
                                 </Button>
                             </Col>
                             <Col xs lg="2">
