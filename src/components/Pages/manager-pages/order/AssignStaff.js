@@ -112,7 +112,7 @@ const AssignStaff = () => {
 
 
     const handleAssign = async () => {
-        if (staffList.length > 0) {
+        if (staffList.employeeIds.length > 0) {
             try {
                 await assignEmployee(staffList)
                     .unwrap()
@@ -124,7 +124,8 @@ const AssignStaff = () => {
             } catch (error) {
                 console.log("Show error: ", error)
             }
-        } else {
+        }
+        else {
             navigate("/manager/order-detail/" + orderId)
         }
     }

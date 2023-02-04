@@ -46,7 +46,7 @@ const Order_approved = () => {
     const [imgList, setImgList] = useState([]);
     const [date, setDate] = useState([]);
     const [time, setTime] = useState([]);
-
+    const [totalPrice, setTotalPrice] = useState([]);
 
 
     //Order Detail
@@ -77,6 +77,7 @@ const Order_approved = () => {
         }
     }, [isFetching]);
 
+
     //Price
     const SumPrice = (quantity, price) => {
         let newPrice = parseFloat(price);
@@ -88,6 +89,14 @@ const Order_approved = () => {
         }
     }
 
+    const sumTotal = () => {
+        let total = 0;
+        for (let index = 0; index < serviceDetail.length; index++) {
+            let sum = serviceDetail[index].price * serviceDetail[index].quantity;
+            total += sum;
+        }
+        return total;
+    }
 
     //Working Status
     const [orderWorkingStatus] = usePostChangeWorkingStatusApproveMutation();
@@ -251,6 +260,7 @@ const Order_approved = () => {
                                                 }
                                             </tbody>
                                         </Table>
+                                        <Form.Label>Tổng giá tiền: {sumTotal()}</Form.Label>
                                     </Col>
                                 </Row>
                                 <Row>

@@ -111,7 +111,7 @@ const AssignStaffApproved = () => {
 
 
     const handleAssign = async () => {
-        if (staffList.length > 0) {
+        if (staffList.employeeIds.length > 0) {
             try {
                 await assignEmployee(staffList)
                     .unwrap()
