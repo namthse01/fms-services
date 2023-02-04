@@ -146,7 +146,7 @@ const Order = () => {
                     </Row>
                     <Row className="d-flex align-items-end justify-content-between">
                         <Col xs={6}>
-                            <Form.Label>Tìm kiếm theo tên:</Form.Label>
+                            <Form.Label>Tìm kiếm theo mã đơn:</Form.Label>
                             <InputGroup>
                                 <Form.Control
                                     type="text"
