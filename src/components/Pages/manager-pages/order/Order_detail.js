@@ -87,12 +87,16 @@ const OrderDetail = () => {
     const [showCheckAssign, setShowCheckAssign] = useState(false);
 
     const checkAssign = () => {
-        for (let index = 0; index < employeeData.length; index++) {
-            if (employeeData[index].workingStatus == true) {
-                changeWorkingStatus()
-            } else {
-                setShowCheckAssign(true);
+        if (orderDetailData.listEmployeeAssign.length > 0) {
+            for (let index = 0; index < orderDetailData.listEmployeeAssign.length; index++) {
+                if (orderDetailData.listEmployeeAssign[index].workingStatus == true) {
+                    changeWorkingStatus()
+                } else {
+                    setShowCheckAssign(true);
+                }
             }
+        } else {
+            setShowCheckAssign(true);
         }
     }
 
