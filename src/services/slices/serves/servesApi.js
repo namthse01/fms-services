@@ -28,8 +28,8 @@ export const servesAPI = apiSlice.injectEndpoints({
                     serviceName: newService.serviceName,
                     serviceDescription: newService.serviceDescription,
                     price: newService.price,
-                    type: newService.serviceType,
-                    "categoryId": 0,
+                    type: newService.categoryId,
+                    categoryId: newService.categoryId,
                     createAt: moment().format("YYYY-MM-DD HH:mm:ss"),
                     updateAt: moment().format("YYYY-MM-DD HH:mm:ss"),
                     status: true

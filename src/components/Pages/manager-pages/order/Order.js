@@ -113,7 +113,7 @@ const Order = () => {
 
     const [orderChangeData, setOrderChangeData] = useState({
         orderId: "",
-        workingStatus: "",
+        workingStatus: "1",
     })
 
     const changeWorkingStatus = async () => {

@@ -152,6 +152,14 @@ const Sidebar = () => {
                             </Nav.Item>
                         )}
 
+                        {isManager && (
+                            <Nav.Item className="menu-button mt-3">
+                                <Nav.Link as={Link} to="/manager/Services">
+                                    Danh sách dịch vụ
+                                </Nav.Link>
+                            </Nav.Item>
+                        )}
+
                         {/* {isAdmin && (
                             <Nav.Item className="menu-button mt-3">
                                 <Nav.Link as={Link} to="/admin/Service">

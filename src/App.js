@@ -18,8 +18,9 @@ import Order from './components/Pages/manager-pages/order/Order';
 import OrderDetail from './components/Pages/manager-pages/order/Order_detail';
 import OrderApproved from './components/Pages/manager-pages/order/Order_approved';
 import AssignStaff from './components/Pages/manager-pages/order/AssignStaff';
-
 import AssignStaffApproved from './components/Pages/manager-pages/order/AssignStaffApproved';
+
+import Services from './components/Pages/manager-pages/serviceApp/ServiceApp';
 
 // import Service from './components/Pages/admin-pages/services/Services';
 // import Account from './components/Pages/admin-pages/accounts/Account';
@@ -129,12 +130,19 @@ const App = () => {
                 <AssignStaffApproved />
               </ProtectedRoute>
             } />
+
             <Route path='/manager/StaffDayOff' element={
               <ProtectedRoute user={["manager"]}>
                 <StaffDayOff />
               </ProtectedRoute>
             } />
 
+            <Route path='/manager/Services' element={
+              <ProtectedRoute user={["manager"]}>
+                <Services />
+              </ProtectedRoute>
+            }
+            />
 
 
             {/* <Route path='/admin/service' element={
