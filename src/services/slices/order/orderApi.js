@@ -33,6 +33,7 @@ export const orderApi = apiSlice.injectEndpoints({
 
         //Delete Staff Assign:
         putDeleteStaffAssign: builder.mutation({
+
             query: (deleteData) => ({
                 url: `/api/assign/manager/deleteAssignByAssignId/${deleteData.assignId}/employeeId/${deleteData.employeeId}`,
                 method: "PUT",

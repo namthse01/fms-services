@@ -162,6 +162,8 @@ const OrderDetail = () => {
         return false;
     });
 
+    console.log("Data:", uniqueStaffData);
+
     return (
         <>
             <Container fluid className="order-detail-container">

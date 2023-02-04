@@ -52,7 +52,7 @@ const AssignStaff = () => {
 
     //Work Status
     const [filterStaffWorkStatus, setfilterStaffWorkStatus] = useState({
-        status: "true",
+        status: "false",
     });
 
     //Work Status
@@ -173,8 +173,8 @@ const AssignStaff = () => {
                                     value={filterStaffWorkStatus.status}
                                     onChange={handleFilterStaffWorkChange}
                                 >
-                                    <option value="true">Trống đơn</option>
-                                    <option value="false">Đang có đơn</option>
+                                    <option value="false">Trống đơn</option>
+                                    <option value="true">Đang có đơn</option>
                                 </Form.Control>
                             </Col>
                             <Col xs={2}>

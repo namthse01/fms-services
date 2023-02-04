@@ -268,13 +268,15 @@ const Order_approved = () => {
 
                                                 {uniqueStaffData
                                                     .map((employee, index) => {
-                                                        return (
-                                                            <tr key={index}>
-                                                                <td>{index}</td>
-                                                                <td>{employee.employeeName}</td>
-                                                                <td >{employee.employeePhoneNumber}</td>
-                                                            </tr>
-                                                        )
+                                                        if (employee.workingStatus === true) {
+                                                            return (
+                                                                <tr key={index}>
+                                                                    <td>{index}</td>
+                                                                    <td>{employee.employeeName}</td>
+                                                                    <td >{employee.employeePhoneNumber}</td>
+                                                                </tr>
+                                                            )
+                                                        }
                                                     })
                                                 }
                                             </tbody>
