@@ -147,7 +147,7 @@ const Sidebar = () => {
                         {isManager && (
                             <Nav.Item className="menu-button mt-3">
                                 <Nav.Link as={Link} to="/manager/StaffDayOff">
-                                    Ngày nghỉ nhân viên
+                                    Đơn xin nghỉ
                                 </Nav.Link>
                             </Nav.Item>
                         )}

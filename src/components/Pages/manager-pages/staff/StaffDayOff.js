@@ -225,36 +225,79 @@ const StaffDayOff = () => {
                                         {staffs
                                             .slice(5 * (active - 1), 5 * active)
                                             .map((staff, index) => {
-                                                return (
-
-                                                    <tr key={index}>
-                                                        <td>{index + 1}</td>
-                                                        <td>{staff.employee.employeeName}</td>
-                                                        <td>{staff.employee.employeePhoneNumber}</td>
-                                                        <td>{moment(staff.dayOff).format("MM/DD/YYYY")}</td>
-                                                        <td>{staff.reason}</td>
-                                                        <td>
-                                                            <Button
-                                                                onClick={() => {
-                                                                    changetatus(staff.id, staff.status)
-                                                                    // navigate('/manager/order-detail/' + orderId);
-                                                                }}
-                                                            >
-                                                                <PersonAddAlt1Icon />
-                                                            </Button>
-                                                        </td>
-                                                        <td>
-                                                            <Button
-                                                                onClick={() => {
-                                                                    changetatusCancel(staff.id)
-                                                                    // navigate('/manager/order-detail/' + orderId);
-                                                                }}
-                                                            >
-                                                                <PersonRemoveIcon />
-                                                            </Button>
-                                                        </td>
-                                                    </tr>
-                                                )
+                                                if (filterDayoffStatus.status == "1") {
+                                                    return (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{staff.employee.employeeName}</td>
+                                                            <td>{staff.employee.employeePhoneNumber}</td>
+                                                            <td>{moment(staff.dayOff).format("MM/DD/YYYY")}</td>
+                                                            <td>{staff.reason}</td>
+                                                            <td>
+                                                                <Button
+                                                                    onClick={() => {
+                                                                        changetatus(staff.id, staff.status)
+                                                                        // navigate('/manager/order-detail/' + orderId);
+                                                                    }}
+                                                                >
+                                                                    <PersonAddAlt1Icon />
+                                                                </Button>
+                                                            </td>
+                                                            <td>
+                                                                <Button
+                                                                    onClick={() => {
+                                                                        changetatusCancel(staff.id)
+                                                                        // navigate('/manager/order-detail/' + orderId);
+                                                                    }}
+                                                                >
+                                                                    <PersonRemoveIcon />
+                                                                </Button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                } else if (filterDayoffStatus.status == "3") {
+                                                    return (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{staff.employee.employeeName}</td>
+                                                            <td>{staff.employee.employeePhoneNumber}</td>
+                                                            <td>{moment(staff.dayOff).format("MM/DD/YYYY")}</td>
+                                                            <td>{staff.reason}</td>
+                                                            <td></td>
+                                                            <td>
+                                                                <Button
+                                                                    onClick={() => {
+                                                                        changetatusCancel(staff.id)
+                                                                        // navigate('/manager/order-detail/' + orderId);
+                                                                    }}
+                                                                >
+                                                                    <PersonRemoveIcon />
+                                                                </Button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
+                                                else if (filterDayoffStatus.status == "4") {
+                                                    return (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{staff.employee.employeeName}</td>
+                                                            <td>{staff.employee.employeePhoneNumber}</td>
+                                                            <td>{moment(staff.dayOff).format("MM/DD/YYYY")}</td>
+                                                            <td>{staff.reason}</td>
+                                                            <td>
+                                                                <Button
+                                                                    onClick={() => {
+                                                                        changetatus(staff.id, staff.status)
+                                                                        // navigate('/manager/order-detail/' + orderId);
+                                                                    }}
+                                                                >
+                                                                    <PersonAddAlt1Icon />
+                                                                </Button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
                                             })
 
                                         }

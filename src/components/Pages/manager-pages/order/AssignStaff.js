@@ -21,6 +21,7 @@ import {
 import RefreshIcon from '@mui/icons-material/Refresh';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 //API 
 import { useGetAllStaffsQuery } from "../../../../services/slices/staff/staffApi";
@@ -141,7 +142,12 @@ const AssignStaff = () => {
                     <Card.Body>
                         <Row>
                             <Col>
-                                <Card.Title>Danh sách nhân viên</Card.Title>
+                                <Card.Title>
+                                    <ArrowBackIcon onClick={() => {
+                                        navigate("/manager/order-detail/" + orderId)
+                                    }} />
+                                    Danh sách nhân viên
+                                </Card.Title>
                             </Col>
                         </Row>
                         <Row className="d-flex align-items-end justify-content-between">
@@ -209,39 +215,50 @@ const AssignStaff = () => {
                                     <tbody>
                                         {staffs
                                             .map((staff, index) => {
-                                                return (
-                                                    <tr key={index}>
-                                                        <td>{index}</td>
-                                                        <td>{staff.employeeName}</td>
-                                                        <td>{staff.employeePhoneNumber}</td>
-                                                        <td>{staff.specialtyName}</td>
-                                                        <td>
-                                                            <div className="action-button-container">
-                                                                <OverlayTrigger
-                                                                    placement="bottom"
-                                                                    delay={{ show: 200, hide: 100 }}
-                                                                    overlay={
-                                                                        <Tooltip
-                                                                            className="customer-edit-button"
-                                                                            id="edit-button-tooltip"
-                                                                        >
-                                                                            thêm vào đơn hàng
-                                                                        </Tooltip>
-                                                                    }
-                                                                >
-
-                                                                    {/* Assign to order */}
-                                                                    <Button
-                                                                        onClick={() => changeButtonIcon(staff.employeeId)
+                                                if (staff.workingStatus === false) {
+                                                    return (
+                                                        <tr key={index}>
+                                                            <td>{index}</td>
+                                                            <td>{staff.employeeName}</td>
+                                                            <td>{staff.employeePhoneNumber}</td>
+                                                            <td>{staff.specialtyName}</td>
+                                                            <td>
+                                                                <div className="action-button-container">
+                                                                    <OverlayTrigger
+                                                                        placement="bottom"
+                                                                        delay={{ show: 200, hide: 100 }}
+                                                                        overlay={
+                                                                            <Tooltip
+                                                                                className="customer-edit-button"
+                                                                                id="edit-button-tooltip"
+                                                                            >
+                                                                                thêm vào đơn hàng
+                                                                            </Tooltip>
                                                                         }
                                                                     >
-                                                                        {staff.workingStatus ? <PersonAddAlt1Icon /> : <PersonRemoveIcon />}
-                                                                    </Button>
-                                                                </OverlayTrigger>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )
+
+                                                                        {/* Assign to order */}
+                                                                        <Button
+                                                                            onClick={() => changeButtonIcon(staff.employeeId)
+                                                                            }
+                                                                        >
+                                                                            <PersonAddAlt1Icon />
+                                                                        </Button>
+                                                                    </OverlayTrigger>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                } else {
+                                                    return (
+                                                        <tr key={index}>
+                                                            <td>{index}</td>
+                                                            <td>{staff.employeeName}</td>
+                                                            <td>{staff.employeePhoneNumber}</td>
+                                                            <td>{staff.specialtyName}</td>
+                                                        </tr>
+                                                    )
+                                                }
                                             })
                                         }
                                     </tbody>
