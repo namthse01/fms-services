@@ -67,6 +67,9 @@ const OrderDetail = () => {
         }
     }
 
+
+    const [statusChk, setStatusChk] = useState([]);
+
     //Order Detail
     const {
         data: orderDetailData = [],
@@ -81,20 +84,15 @@ const OrderDetail = () => {
             setServiceData(orderDetailData.listOrderServiceInfor)
             setDate(orderDetailData.implementationDate)
             setTime(orderDetailData.implementationTime)
+            setStatusChk(orderDetailData.listEmployeeAssign.filter((x) => x.workingStatus == true))
         }
     }, [isFetching]);
 
     const [showCheckAssign, setShowCheckAssign] = useState(false);
 
     const checkAssign = () => {
-        if (orderDetailData.listEmployeeAssign.length > 0) {
-            for (let index = 0; index < orderDetailData.listEmployeeAssign.length; index++) {
-                if (orderDetailData.listEmployeeAssign[index].workingStatus == true) {
-                    changeWorkingStatus()
-                } else {
-                    setShowCheckAssign(true);
-                }
-            }
+        if (statusChk.length > 0) {
+            changeWorkingStatus()
         } else {
             setShowCheckAssign(true);
         }
