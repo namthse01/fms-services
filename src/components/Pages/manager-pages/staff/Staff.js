@@ -23,6 +23,8 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 //Api
 import { useGetAllStaffsQuery } from "../../../../services/slices/staff/staffApi";
 
+import CustomPagination from "../../../customPagination/CustomPagination";
+
 const Staff = () => {
 
     //local state
@@ -60,9 +62,8 @@ const Staff = () => {
 
     useEffect(() => {
         if (!isFetching) {
-            setStaffs(staffsData)
-            if (sort === "asc") {
 
+            if (sort === "asc") {
                 setStaffs(staffsData.filter((x) => x.employeeName.includes(search)));
             } else {
                 setStaffs(staffsData.filter((x) => x.employeeName.includes(search)).reverse());
@@ -162,7 +163,7 @@ const Staff = () => {
                                     </thead>
                                     <tbody>
                                         {staffs
-                                            .slice(10 * (active - 1), 10 * active)
+                                            .slice(5 * (active - 1), 5 * active)
                                             .map((staff, index) => {
                                                 return (
                                                     <tr key={index}>
@@ -209,11 +210,11 @@ const Staff = () => {
                     </Row>
                     <Row className="mt-2">
                         <Col>
-                            {/* <CustomPagination
-                                count={Math.ceil(customers.length / 10)}
+                            <CustomPagination
+                                count={Math.ceil(staffs.length / 5)}
                                 handlePaginationClick={handlePaginationClick}
                                 page={active}
-                            /> */}
+                            />
                         </Col>
                     </Row>
                 </Card>
