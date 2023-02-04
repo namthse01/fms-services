@@ -33,9 +33,6 @@ import { isEmpty } from "lodash";
 
 const Order_approved = () => {
 
-    const [showViewImg, setShowViewImg] = useState(false);
-    const [picture, setPicture] = useState("");
-    let imgFirebase = "https://firebasestorage.googleapis.com";
     const { orderId } = useParams();
 
     //local state
@@ -284,7 +281,7 @@ const Order_approved = () => {
                                 </Row>
                                 <Row>
                                     <Col className="table-container">
-                                        <Form.Label>Danh sách dịch vụ khách hàng đặt:</Form.Label>
+                                        <Form.Label>Danh sách nhân viên:</Form.Label>
                                         <Table bordered size="sm">
                                             <thead>
                                                 <tr>
@@ -325,36 +322,6 @@ const Order_approved = () => {
 
                                 {/* Nếu có ảnh, điều này xảy ra */}
 
-                                {imgList.length !== 0 && (
-                                    <>
-                                        <Row>
-                                            <Col>
-                                                <Form.Label>
-                                                    Hình ảnh thực tế (nhấn vào ảnh để phóng lớn):
-                                                </Form.Label>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            {imgList.map((img, index) => {
-                                                return (
-                                                    <Col
-                                                        key={index}
-                                                        style={{ cursor: "pointer", }}
-                                                        onClick={() => {
-                                                            setPicture(imgFirebase + img);
-                                                            setShowViewImg(true);
-                                                        }}
-                                                    >
-                                                        {console.log("IMage:", img)}
-                                                        <img
-                                                            src={picture} />
-                                                    </Col>
-                                                );
-                                            })}
-
-                                        </Row>
-                                    </>
-                                )}
                             </Col>
                         )}
                     </Card.Body>
@@ -394,16 +361,6 @@ const Order_approved = () => {
                     </Card.Footer>
                 </Card>
             </Container >
-            <Modal
-                show={showViewImg}
-                onHide={() => {
-                    setShowViewImg(false);
-                }}
-                centered
-                dialogClassName="img-modal"
-            >
-                <img style={{ width: "100%", height: "auto" }} src={picture} />
-            </Modal>
         </>
     );
 }
