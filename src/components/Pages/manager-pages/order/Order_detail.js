@@ -298,6 +298,7 @@ const OrderDetail = () => {
                                         <tr>
                                             <th>#</th>
                                             <th>Loại dịch vụ</th>
+                                            <th>Tên dịch vụ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -308,6 +309,7 @@ const OrderDetail = () => {
                                                     <tr key={index}>
                                                         <td>{index + 1}</td>
                                                         <td>{service.categoryName}</td>
+                                                        <td>{service.serviceName}</td>
                                                     </tr>
                                                 )
                                             })
