@@ -12,6 +12,7 @@ import {
     Row,
     Table,
     Spinner,
+    Modal
 } from "react-bootstrap";
 
 
@@ -83,6 +84,17 @@ const OrderDetail = () => {
         }
     }, [isFetching]);
 
+    const [showCheckAssign, setShowCheckAssign] = useState(false);
+
+    const checkAssign = () => {
+        for (let index = 0; index < employeeData.length; index++) {
+            if (employeeData[index].workingStatus == true) {
+                changeWorkingStatus()
+            } else {
+                setShowCheckAssign(true);
+            }
+        }
+    }
 
     //Working Status
     const [orderWorkingStatus] = usePostChangeWorkingStatusAssignMutation();
@@ -380,6 +392,7 @@ const OrderDetail = () => {
                             </Row>
                         )}
                         <Row>
+
                             <Col className="add-staff-btn">
                                 <Button
                                     onClick={() => {
@@ -396,7 +409,7 @@ const OrderDetail = () => {
                             <Col xs lg="2">
                                 <Button
                                     onClick={() => {
-                                        changeWorkingStatus()
+                                        checkAssign()
                                         // navigate('/manager/order-detail/' + orderId);
                                     }}
                                 >
@@ -417,7 +430,37 @@ const OrderDetail = () => {
                     </Card.Footer>
                 </Card>
             </Container >
-
+            < Modal
+                show={showCheckAssign}
+                onHide={() => {
+                    setShowCheckAssign(false);
+                }}
+                centered
+                dialogClassName="change-status-modal"
+            >
+                <Modal.Body>
+                    <Row>
+                        <Col>
+                            <Card.Title>Đơn chưa có thợ</Card.Title>
+                        </Col>
+                    </Row>
+                    <Row className="d-flex align-items-end justify-content-between">
+                        <Col>
+                            <Form.Label>Đơn chưa có thợ được đăng ký</Form.Label>
+                        </Col>
+                    </Row>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        onClick={() => {
+                            setShowCheckAssign(false);
+                        }}
+                    >
+                        Xác nhận
+                    </Button>
+                </Modal.Footer>
+            </Modal >
         </>
     )
 }
