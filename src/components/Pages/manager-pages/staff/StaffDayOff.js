@@ -110,9 +110,11 @@ const StaffDayOff = () => {
         try {
             await changeDayOffStatus(id)
                 .unwrap()
-                .then(
-                    refetch()
-                )
+                .then((res) => {
+                    if (res) {
+                        refetch()
+                    }
+                })
         } catch (error) {
             console.log("Show error: ", error)
         }
@@ -122,9 +124,11 @@ const StaffDayOff = () => {
         try {
             await changeDayOffStatusCancel(id)
                 .unwrap()
-                .then(
-                    refetch()
-                )
+                .then((res) => {
+                    if (res) {
+                        refetch()
+                    }
+                })
         } catch (error) {
             console.log("Show error: ", error)
         }
